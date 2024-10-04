@@ -15,6 +15,7 @@ body {
     height: 50px;
 }
 
+/* General nav styles */
 nav {
     background-color: #121518;
     padding: 10px 20px;
@@ -25,13 +26,17 @@ nav {
     z-index: 1000;
 }
 
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .nav-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .nav-list li {
@@ -51,6 +56,35 @@ nav {
     color: #ffffff;
     background-color: #2a2f36;
     border-radius: 5px;
+}
+
+/* Hamburger styles */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Mobile responsive styles */
+@media only screen and (max-width: 768px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-list li {
+        text-align: left;
+        width: 100%;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
 }
 
 /* Footer Styles */
