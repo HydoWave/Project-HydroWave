@@ -20,35 +20,45 @@ body {
     height: 200px;
 }
 
-/* General nav styles */
+/* Center the navigation bar content */
 nav {
     background-color: #121518;
-    padding: 10px 20px;
+    padding: 10px 0;  /* Remove extra left/right padding */
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
 }
 
+/* Ensure nav-container is centered and flexbox is used properly */
 .nav-container {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;  /* Add some side padding to the container */
 }
 
+/* Style for the navigation list */
 .nav-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center; /* Center the list items */
+    align-items: center;
 }
 
+/* Flexbox to ensure equal space between list items */
 .nav-list li {
-    flex: 1;
+    margin: 0 15px;  /* Adjust the spacing between menu items */
     text-align: center;
 }
 
+/* Ensure links are properly styled */
 .nav-list a {
     text-decoration: none;
     color: #00e5ff;
@@ -57,6 +67,7 @@ nav {
     display: block;
 }
 
+/* Style for hover and active states */
 .nav-list a:hover, .nav-list a.active {
     color: #ffffff;
     background-color: #2a2f36;
