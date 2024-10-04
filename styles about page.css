@@ -10,14 +10,9 @@ body {
     min-height: 170vh;
 }
 
-.image1 {
+.image {
     width: 50px;
     height: 50px;
-}
-
-.image2 {
-    width: 400px;
-    height: 200px;
 }
 
 /* Center the navigation bar content */
