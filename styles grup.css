@@ -1,0 +1,211 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0; /* Light background for contrast */
+    color: #000000; /* Black text color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 225vh;
+}
+
+.image {
+    width: 50px;
+    height: 50px;
+}
+
+nav {
+    background-color: #121518;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list li {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #00e5ff;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+}
+
+.nav-list a:hover, .nav-list a.active {
+    color: #ffffff;
+    background-color: #2a2f36;
+    border-radius: 5px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #121518;
+    color: #00e5ff;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 97.4%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-logo {
+    width: 80px; /* Make the footer logo larger if needed */
+    height: 80px;
+}
+
+.footer-text {
+    max-width: 800px;
+    text-align: left;
+}
+
+.footer-text h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.footer-text h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    color: #00e5ff;
+}
+
+.footer-text p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #d1d1d1;
+}
+
+.footer-text a {
+    color: #00e5ff;
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding-top: 80px;
+}
+
+.section {
+    text-align: left;
+    background-color: #ffffff; /* White background for content sections */
+    color: #000000; /* Black text color */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(50px);
+}
+
+#section1 {
+    background: rgba(255, 255, 255, 0.8); /* White with transparency */
+    background-image: url('group\ background1.jpg'); /* Replace with actual image path */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: lighten;
+}
+
+#section2 {
+    background: rgba(255, 255, 255, 0.8); /* White with transparency */
+    background-image: url('group\ background2.jpg'); /* Replace with actual image path */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: lighten;
+}
+
+#section3 {
+    background: rgba(255, 255, 255, 0.8); /* White with transparency */
+    background-image: url('group\ background3.jpg'); /* Replace with actual image path */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: lighten;
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.text-content {
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.team-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.team-button {
+    padding: 10px 20px;
+    background-color: #00e5ff;
+    color: #2a2f36;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.team-button:hover {
+    background-color: #00c4d8;
+}
+
+/* Default styles for larger screens (laptops, desktops) */
+body {
+    font-size: 16px;
+    padding: 20px;
+}
+
+/* Media query for screens smaller than 768px (tablets, phones) */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Media query for screens smaller than 480px (phones) */
+@media only screen and (max-width: 480px) {
+    body {
+        font-size: 12px;
+        padding: 5px;
+    }
+}

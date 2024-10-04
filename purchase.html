@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Items</title>
+    <link rel="stylesheet" href="styles purchase.css">
+</head>
+<body>
+    <nav>
+        <ul class="nav-list">
+            <li><img src="picture.png" alt="HydroWave Logo" class="image"></li>
+            <li><a href="index.html" class="nav-link">Home Page</a></li>
+            <li><a href="grup.html" class="nav-link">About the Group</a></li>
+            <li><a href="projects.html" class="nav-link">Projects</a></li>
+            <li><a href="about.html" class="nav-link">About the Game</a></li>
+            <li><a href="purchase.html" class="nav-link">Purchases</a></li>
+        </ul>
+    </nav>
+    
+    <div class="content">
+        <h1 class="centered-text">Purchase Items</h1>
+        <section class="product-list">
+            <div class="product" data-name="Full Game" data-price="Avalible soon..." data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg,item1-3.jpg,item1-4.jpg,item1-5.jpg,item1-6.jpg">
+                <img src="item1.jpg" alt="Full Game" class="product-image">
+                <h2>Full Game</h2>
+                <p>Avalible soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+            <div class="product" data-name="Cards" data-price="Avalible soon..." data-description="Have your cards been damaged or lost? Don't worry, you can just order a new card pack." data-images="item2-1.jpg,item2-2.jpg,item2-3.jpg,item2-4.jpg,item2-5.jpg,item2-6.jpg">
+                <img src="item2.jpg" alt="Cards" class="product-image">
+                <h2>Cards</h2>
+                <p>Avalible soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+            <div class="product" data-name="Gameboard" data-price="Avalible soon..." data-description="Has your gameboard been damaged? Don't worry, you can just order a new gameboard." data-images="item3-1.jpg,item3-2.jpg,item3-3.jpg,item3-4.jpg,item3-5.jpg,item3-6.jpg">
+                <img src="item3.jpg" alt="Gameboard" class="product-image">
+                <h2>Gameboard</h2>
+                <p>Avalible soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+            <div class="product" data-name="Game Figures" data-price="Avalible soon..." data-description="Have your game figures been lost? Don't worry, you can just order a new figure pack." data-images="item4-1.jpg,item4-2.jpg,item4-3.jpg,item4-4.jpg,item4-5.jpg,item4-6.jpg">
+                <img src="item4.jpg" alt="Game Figures" class="product-image">
+                <h2>Game Figures</h2>
+                <p>Avalible soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Item Details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="image-gallery">
+                <!-- Left Arrow -->
+                <span class="arrow left-arrow">&#10094;</span>
+                <!-- Image Display -->
+                <img id="modal-image" src="" alt="Product Image" />
+                <!-- Right Arrow -->
+                <span class="arrow right-arrow">&#10095;</span>
+            </div>
+            <div class="dot-container"></div> <!-- Dots will be dynamically added here -->
+            <h2 id="modal-title">Item Name</h2>
+            <p id="modal-description">Item description goes here.</p>
+            <p id="modal-price">Price: €0.00</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
+            <div class="footer-text">
+                <h2>Contacts</h2>
+                <h3>Email:</h3>
+                <p>For question about the game: <a href="mailto:hydrowave.podpora@gmail.com">hydrowave.support@gmail.com</a></p>
+                <p>For question about the projects: <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts-purchase.js"></script>
+</body>
+</html>
