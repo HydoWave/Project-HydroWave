@@ -9,6 +9,11 @@ body {
     min-height: 100vh;
 }
 
+.image {
+    width: 50px;
+    height: 50px;
+}
+
 /* General nav styles */
 nav {
     background-color: #121518;
