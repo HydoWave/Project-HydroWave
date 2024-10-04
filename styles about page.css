@@ -10,9 +10,14 @@ body {
     min-height: 170vh;
 }
 
-.image {
+.image1 {
     width: 50px;
     height: 50px;
+}
+
+.image2 {
+    width: 400px;
+    height: 200px;
 }
 
 /* General nav styles */
