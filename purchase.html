@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Items</title>
-    <link rel="stylesheet" href="styles-purchase.css">
+    <link rel="stylesheet" href="styles purchase.css">
+    <!-- Include PayPal SDK script -->
     <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=EUR"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
         </div>
     </nav>
 
-    <div class="content">
+     <div class="content">
         <h1 class="centered-text">Purchase Items</h1>
         <section class="product-list">
             <div class="product" data-name="Full Game" data-price="Avalible soon..." data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg,item1-3.jpg,item1-4.jpg,item1-5.jpg,item1-6.jpg">
@@ -55,9 +56,20 @@
     <!-- Modal for Item Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
+            <span class="close-button">&times;</span>
+            <div class="image-gallery">
+                <!-- Left Arrow -->
+                <span class="arrow left-arrow">&#10094;</span>
+                <!-- Image Display -->
+                <img id="modal-image" src="" alt="Product Image" />
+                <!-- Right Arrow -->
+                <span class="arrow right-arrow">&#10095;</span>
+            </div>
+            <div class="dot-container"></div> <!-- Dots will be dynamically added here -->
             <h2 id="modal-title">Item Name</h2>
+            <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
+            <button class="buy-button">Buy Now</button>
             <div id="paypal-button-container"></div>
         </div>
     </div>
@@ -67,6 +79,7 @@
             <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
             <div class="footer-text">
                 <h2>Contacts</h2>
+                <h3>Email:</h3>
                 <p>Game questions: <a href="mailto:hydrowave.support@gmail.com">hydrowave.support@gmail.com</a></p>
                 <p>Project questions: <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a></p>
             </div>
@@ -74,5 +87,54 @@
     </footer>
 
     <script src="scripts-purchase.js"></script>
+    <script>
+        function toggleMenu() {
+            const navList = document.querySelector('.nav-list');
+            navList.classList.toggle('active');
+        }
+
+        let selectedItem = null;
+
+        function openModal(button) {
+            const product = button.closest('.product');
+            selectedItem = {
+                name: product.getAttribute('data-name'),
+                price: product.getAttribute('data-price')
+            };
+
+            document.getElementById('modal-title').textContent = selectedItem.name;
+            document.getElementById('modal-price').textContent = `Price: €${selectedItem.price}`;
+            document.getElementById('modal').style.display = 'block';
+
+            // Load the PayPal button
+            loadPayPalButton(selectedItem.price);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function loadPayPalButton(price) {
+            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
+
+            paypal.Buttons({
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: price
+                            }
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then((details) => {
+                        alert(`Transaction completed by ${details.payer.name.given_name}!`);
+                        closeModal();
+                    });
+                }
+            }).render('#paypal-button-container');
+        }
+    </script>
 </body>
 </html>
