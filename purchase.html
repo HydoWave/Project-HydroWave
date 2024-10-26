@@ -1,13 +1,14 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Items</title>
     <link rel="stylesheet" href="styles purchase.css">
+    <!-- Include PayPal SDK script -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=EUR"></script>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <img src="picture.png" alt="HydroWave Logo" class="image">
@@ -22,40 +23,20 @@
         </div>
     </nav>
 
-    <!-- Content Section -->
     <div class="content">
         <h1 class="centered-text">Purchase Items</h1>
         <section class="product-list">
-            <!-- Product 1: The Game - Navium -->
-            <div class="product" data-name="The Game - Navium" data-price="Available soon..." data-description="The complete Navium game experience with all game features included." data-images="navium1.jpg,navium2.jpg">
-                <img src="navium.jpg" alt="The Game - Navium" class="product-image">
-                <h2>The Game - Navium</h2>
-                <p>Available soon...</p>
-                <button class="details-button">View Details</button>
+            <div class="product" data-name="Full Game - Navium" data-price="19.99" data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg">
+                <img src="item1.jpg" alt="Full Game - Navium" class="product-image">
+                <h2>Full Game - Navium</h2>
+                <p>€19.99</p>
+                <button class="details-button" onclick="openModal(this)">View Details</button>
             </div>
-
-            <!-- Product 2: Cards -->
-            <div class="product" data-name="Cards" data-price="Available soon..." data-description="Need replacement cards? Order a new card set to enhance gameplay." data-images="cards1.jpg,cards2.jpg">
-                <img src="cards.jpg" alt="Cards" class="product-image">
+            <div class="product" data-name="Cards" data-price="9.99" data-description="Have your cards been damaged or lost? Order a new card pack." data-images="item2-1.jpg,item2-2.jpg">
+                <img src="item2.jpg" alt="Cards" class="product-image">
                 <h2>Cards</h2>
-                <p>Available soon...</p>
-                <button class="details-button">View Details</button>
-            </div>
-
-            <!-- Product 3: Gameboard -->
-            <div class="product" data-name="Gameboard" data-price="Available soon..." data-description="A beautifully designed gameboard to immerse players in the Navium world." data-images="gameboard1.jpg,gameboard2.jpg">
-                <img src="gameboard.jpg" alt="Gameboard" class="product-image">
-                <h2>Gameboard</h2>
-                <p>Available soon...</p>
-                <button class="details-button">View Details</button>
-            </div>
-
-            <!-- Product 4: Game Figures -->
-            <div class="product" data-name="Game Figures" data-price="Available soon..." data-description="Custom game figures to enhance your experience of Navium." data-images="figures1.jpg,figures2.jpg">
-                <img src="figures.jpg" alt="Game Figures" class="product-image">
-                <h2>Game Figures</h2>
-                <p>Available soon...</p>
-                <button class="details-button">View Details</button>
+                <p>€9.99</p>
+                <button class="details-button" onclick="openModal(this)">View Details</button>
             </div>
         </section>
     </div>
@@ -63,7 +44,7 @@
     <!-- Modal for Item Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
+            <span class="close-button" onclick="closeModal()">&times;</span>
             <div class="image-gallery">
                 <span class="arrow left-arrow">&#10094;</span>
                 <img id="modal-image" src="" alt="Product Image" />
@@ -73,11 +54,11 @@
             <h2 id="modal-title">Item Name</h2>
             <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
-            <button class="buy-button" onclick="purchaseItem()">Buy Now</button>
+            <!-- PayPal Button container -->
+            <div id="paypal-button-container"></div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
@@ -90,17 +71,53 @@
         </div>
     </footer>
 
-    <script src="scripts-purchase.js"></script>
     <script>
-        // Function to toggle mobile menu
         function toggleMenu() {
             const navList = document.querySelector('.nav-list');
             navList.classList.toggle('active');
         }
 
-        // Purchase alert function
-        function purchaseItem() {
-            alert("Thank you for your purchase! This item will be available soon.");
+        let selectedItem = null;
+
+        function openModal(button) {
+            const product = button.closest('.product');
+            selectedItem = {
+                name: product.getAttribute('data-name'),
+                price: product.getAttribute('data-price')
+            };
+
+            document.getElementById('modal-title').textContent = selectedItem.name;
+            document.getElementById('modal-price').textContent = `Price: €${selectedItem.price}`;
+            document.getElementById('modal').style.display = 'block';
+
+            // Load the PayPal button
+            loadPayPalButton(selectedItem.price);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function loadPayPalButton(price) {
+            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
+
+            paypal.Buttons({
+                createOrder: (data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: price
+                            }
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then((details) => {
+                        alert(`Transaction completed by ${details.payer.name.given_name}!`);
+                        closeModal();
+                    });
+                }
+            }).render('#paypal-button-container');
         }
     </script>
 </body>
