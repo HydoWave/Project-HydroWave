@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Items</title>
     <link rel="stylesheet" href="styles purchase.css">
-    <!-- Include PayPal SDK script -->
-    <script src="https://www.paypal.com/sdk/js?AVcZJ_-14MAiMzPB-TeN7YwxcpvdduNhtEsqgeYHsJP5JrB1GUHbFuCbjeb3sC2DoXl9BJZ2MBKOAejk&currency=EUR"></script>
+    <!-- Corrected PayPal SDK script URL -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=EUR"></script>
 </head>
 <body>
     <nav>
@@ -53,37 +53,25 @@
         </section>
     </div>
 
-    <!-- Modal for Item Details -->
+   <!-- Modal for Item Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <div class="image-gallery">
-                <!-- Left Arrow -->
                 <span class="arrow left-arrow">&#10094;</span>
-                <!-- Image Display -->
                 <img id="modal-image" src="" alt="Product Image" />
-                <!-- Right Arrow -->
                 <span class="arrow right-arrow">&#10095;</span>
             </div>
-            <div class="dot-container"></div> <!-- Dots will be dynamically added here -->
+            <div class="dot-container"></div>
             <h2 id="modal-title">Item Name</h2>
             <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
-            <button class="buy-button">Buy Now</button>
             <div id="paypal-button-container"></div>
         </div>
     </div>
 
     <footer>
-        <div class="footer-content">
-            <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
-            <div class="footer-text">
-                <h2>Contacts</h2>
-                <h3>Email:</h3>
-                <p>Game questions: <a href="mailto:hydrowave.support@gmail.com">hydrowave.support@gmail.com</a></p>
-                <p>Project questions: <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a></p>
-            </div>
-        </div>
+        <!-- Footer content here -->
     </footer>
 
     <script src="scripts-purchase.js"></script>
@@ -99,14 +87,13 @@
             const product = button.closest('.product');
             selectedItem = {
                 name: product.getAttribute('data-name'),
-                price: product.getAttribute('data-price')
+                price: product.querySelector('p').textContent.replace('€', '')
             };
 
             document.getElementById('modal-title').textContent = selectedItem.name;
             document.getElementById('modal-price').textContent = `Price: €${selectedItem.price}`;
             document.getElementById('modal').style.display = 'block';
 
-            // Load the PayPal button
             loadPayPalButton(selectedItem.price);
         }
 
@@ -115,7 +102,7 @@
         }
 
         function loadPayPalButton(price) {
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
+            document.getElementById('paypal-button-container').innerHTML = '';
 
             paypal.Buttons({
                 createOrder: (data, actions) => {
@@ -132,6 +119,10 @@
                         alert(`Transaction completed by ${details.payer.name.given_name}!`);
                         closeModal();
                     });
+                },
+                onError: (err) => {
+                    console.error(err);
+                    alert('An error occurred during the transaction');
                 }
             }).render('#paypal-button-container');
         }
