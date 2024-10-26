@@ -23,23 +23,36 @@
         </div>
     </nav>
 
-    <div class="content">
+     <div class="content">
         <h1 class="centered-text">Purchase Items</h1>
         <section class="product-list">
-            <div class="product" data-name="Full Game - Navium" data-price="19.99" data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg">
-                <img src="item1.jpg" alt="Full Game - Navium" class="product-image">
-                <h2>Full Game - Navium</h2>
-                <p>€19.99</p>
-                <button class="details-button" onclick="openModal(this)">View Details</button>
+            <div class="product" data-name="The Game - Navium" data-price="49.99" data-description="Complete game set including all features." data-images="images/item1.jpg">
+                <img src="images/item1.jpg" alt="The Game - Navium" class="product-image">
+                <h2>The Game - Navium</h2>
+                <p>Price: €49.99</p>
+                <button class="details-button" onclick="showModal('The Game - Navium', '49.99', 'Complete game set including all features.', 'images/item1.jpg')">View Details</button>
             </div>
-            <div class="product" data-name="Cards" data-price="9.99" data-description="Have your cards been damaged or lost? Order a new card pack." data-images="item2-1.jpg,item2-2.jpg">
-                <img src="item2.jpg" alt="Cards" class="product-image">
+            <div class="product" data-name="Cards" data-price="9.99" data-description="Additional card pack." data-images="images/item2.jpg">
+                <img src="images/item2.jpg" alt="Cards" class="product-image">
                 <h2>Cards</h2>
-                <p>€9.99</p>
-                <button class="details-button" onclick="openModal(this)">View Details</button>
+                <p>Price: €9.99</p>
+                <button class="details-button" onclick="showModal('Cards', '9.99', 'Additional card pack.', 'images/item2.jpg')">View Details</button>
+            </div>
+            <div class="product" data-name="Gameboard" data-price="19.99" data-description="Custom gameboard for enhanced play." data-images="images/item3.jpg">
+                <img src="images/item3.jpg" alt="Gameboard" class="product-image">
+                <h2>Gameboard</h2>
+                <p>Price: €19.99</p>
+                <button class="details-button" onclick="showModal('Gameboard', '19.99', 'Custom gameboard for enhanced play.', 'images/item3.jpg')">View Details</button>
+            </div>
+            <div class="product" data-name="Game Figures" data-price="14.99" data-description="Set of detailed game figures." data-images="images/item4.jpg">
+                <img src="images/item4.jpg" alt="Game Figures" class="product-image">
+                <h2>Game Figures</h2>
+                <p>Price: €14.99</p>
+                <button class="details-button" onclick="showModal('Game Figures', '14.99', 'Set of detailed game figures.', 'images/item4.jpg')">View Details</button>
             </div>
         </section>
     </div>
+
 
     <!-- Modal for Item Details -->
     <div id="modal" class="modal">
