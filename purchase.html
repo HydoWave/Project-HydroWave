@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Items</title>
     <link rel="stylesheet" href="styles purchase.css">
-    <script src="https://www.paypal.com/sdk/js?client-id=YEpJCJ2PgvY5JnEfCLK2KIL6YxRosBJaQfwn3gjYSVCcKzXBUfm2hWPVFjwl_mmniEF0W6L0JKLc9wD&currency=EUR"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AYEpJCJ2PgvY5JnEfCLK2KIL6YxRosBJaQfwn3gjYSVCcKzXBUfm2hWPVFjwl_mmniEF0W6L0JKLc9wD&currency=EUR"></script>
 </head>
 <body>
     <nav>
@@ -104,26 +104,31 @@
                 return;
             }
 
-            paypal.Buttons({
-                createOrder: (data, actions) => {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: { value: price }
-                        }]
-                    });
-                },
-                onApprove: (data, actions) => {
-                    return actions.order.capture().then((details) => {
-                        alert(`Transaction completed by ${details.payer.name.given_name}!`);
-                        closeModal();
-                    });
-                },
-                onError: (err) => {
-                    console.error(err);
-                    alert('An error occurred during the transaction');
-                }
-            }).render('#paypal-button-container');
+            function loadPayPalButton(price) {
+    document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
+
+    paypal.Buttons({
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: price
+                    }
+                }]
+            });
+        },
+        onApprove: (data, actions) => {
+            return actions.order.capture().then((details) => {
+                alert(`Transaction completed by ${details.payer.name.given_name}!`);
+                closeModal();
+            });
+        },
+        onError: (err) => {
+            console.error('PayPal error:', err);
+            alert('An error occurred during the transaction');
         }
+    }).render('#paypal-button-container');
+}
 
         document.querySelectorAll('.details-button').forEach(button => {
             button.addEventListener('click', function() {
