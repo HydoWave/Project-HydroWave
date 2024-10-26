@@ -1,89 +1,107 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hydrowave - Projects</title>
-    <link rel="stylesheet" href="styles projects.css">
+    <title>Purchase Items</title>
+    <link rel="stylesheet" href="styles-purchase.css">
 </head>
-<body class="home-page">
-  <nav>
-    <div class="nav-container">
-        <img src="picture.png" alt="HydroWave Logo" class="image">
-        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-        <ul class="nav-list">
-            <li><a href="index.html" class="nav-link">Home Page</a></li>
-            <li><a href="grup.html" class="nav-link">About the Group</a></li>
-            <li><a href="projects.html" class="nav-link">Projects</a></li>
-            <li><a href="about.html" class="nav-link">About the Game</a></li>
-            <li><a href="purchase.html" class="nav-link">Purchases</a></li>
-        </ul>
-    </div>
-</nav>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <img src="picture.png" alt="HydroWave Logo" class="image">
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Home Page</a></li>
+                <li><a href="grup.html" class="nav-link">About the Group</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="about.html" class="nav-link">About the Game</a></li>
+                <li><a href="purchase.html" class="nav-link">Purchases</a></li>
+            </ul>
+        </div>
+    </nav>
 
-
-            <div class="content">
-                <section id="section1" class="section">
-                    <h1 class="title">Past Projects</h1>
-                    <div class="text-content">
-                        <p>Our first project we were working on was a hydrogen ship for the conferenc of “The Role of Academia and Industry to Inspire the Next STEM Generation: IUPAP Satellite Event at BSBF 2024” for which we made a technical book describing the system features of the hydrogen ship (e.g. fuel cells, electrolysis flow, solar cells). And two different model for an operational system for the solar cells. It also contains approximate cost calculations for the construction of the ship and its environmental impact.</p>
-                        <p>We went on to design a board game called "Navium" for promoting the hydrogen ship and a brighter and sustainable future for our planet. The game will soon be available for purchase on this website.</p>
-                            <p>Download the technical book:</p>
-                            <ul>
-                                <li><a href="hydrogen_ship_technical_book_slo.pdf" download>Slovenian (PDF)</a></li>
-                                <li><a href="hydrogen_ship_technical_book_ger.pdf" download>German (PDF)</a></li>
-                                <li><a href="hydrogen_ship_technical_book_eng.pdf" download>English (PDF)</a></li>
-                    </div>
-                </section>
-        
-                <section id="section2" class="section">
-                    <h1 class="title">Ongoing Projects</h1>
-                    <div class="text-content">
-                        <p>At the moment we are working on upgrading and commercializing the game "Navium", founding a company which will mass produce it. We are trying to find a cheap and sustainable way for the game’s mass production and its marketing.</p>
-                        <p>Other data about the game is visible under the page <a href="about.html" class="nav-link">About the Game</a>.</p>
-                        <p>We are also working on two other projects within the "Energy and Nuclear Technology" competition, a competition organized by the ICJT (Educational Centre for Nuclear Technology), a part of the IJS (The Jožef Stefan Institute). We are making two different models for the competition: the first model is going to be a representation of a facility for hydrogen production, and the second one is going to depict a new kind of a fission reactor we will try to make.</p>
-                        <p>Read more about the competition here: <a href="https://www.icjt.org/nagradni-natecaj-energija-in-jedrska-tehnologija-3/" target="_blank">Energy and Nuclear Tehnology - Competition</a></p>
-                        <p>If you have any other questions about our projects or think you can help us with them, please contact us on <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a>.</p>
-                    </div>
-                </section>
-        
-                <section id="section3" class="section">
-                    <h1 class="title">Future Projects</h1>
-                    <div class="text-content">
-                        <p>Coming soon...</p>
-                    </div>
-                </section>
-        
-                <section id="section4" class="section">
-                    <h1 class="title">Our Accomplishments</h1>
-                    <div class="text-content">
-                        <p>We are proud to announce that our contribution on the hydrogen cargo ship won the first place at “The Role of Academia and Industry to Inspire the Next STEM Generation: IUPAP Satellite Event at BSBF 2024” conference.</p>
-                        <p>Read more about it here: <a href="https://www.bic-lj.si/novice/prvo-mesto-za-dijake-gimnazije-veterinarske-sole-za-prispevek-o-tovorni-ladji-na-vodik" target="_blank">First Place Award - Hydrogen Cargo Ship Article</a></p>
-                    </div>
-                </section>
+    <!-- Content Section -->
+    <div class="content">
+        <h1 class="centered-text">Purchase Items</h1>
+        <section class="product-list">
+            <!-- Product 1: The Game - Navium -->
+            <div class="product" data-name="The Game - Navium" data-price="Available soon..." data-description="The complete Navium game experience with all game features included." data-images="navium1.jpg,navium2.jpg">
+                <img src="navium.jpg" alt="The Game - Navium" class="product-image">
+                <h2>The Game - Navium</h2>
+                <p>Available soon...</p>
+                <button class="details-button">View Details</button>
             </div>
 
-            <footer>
-                <div class="footer-content">
-                    <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
-                    <div class="footer-text">
-                        <h2>Contacts</h2>
-                        <h3>Email:</h3>
-                        <p>for questions about the game: <a href="mailto:hydrowave.podpora@gmail.com">hydrowave.support@gmail.com</a></p>
-                        <p>For questions about the projects: <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a></p>
-                    </div>
-                </div>
-            </footer>
+            <!-- Product 2: Cards -->
+            <div class="product" data-name="Cards" data-price="Available soon..." data-description="Need replacement cards? Order a new card set to enhance gameplay." data-images="cards1.jpg,cards2.jpg">
+                <img src="cards.jpg" alt="Cards" class="product-image">
+                <h2>Cards</h2>
+                <p>Available soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
 
-            <script src="scripts grup.js"></script>
-            <script src="scripts all.js"></script>
+            <!-- Product 3: Gameboard -->
+            <div class="product" data-name="Gameboard" data-price="Available soon..." data-description="A beautifully designed gameboard to immerse players in the Navium world." data-images="gameboard1.jpg,gameboard2.jpg">
+                <img src="gameboard.jpg" alt="Gameboard" class="product-image">
+                <h2>Gameboard</h2>
+                <p>Available soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+
+            <!-- Product 4: Game Figures -->
+            <div class="product" data-name="Game Figures" data-price="Available soon..." data-description="Custom game figures to enhance your experience of Navium." data-images="figures1.jpg,figures2.jpg">
+                <img src="figures.jpg" alt="Game Figures" class="product-image">
+                <h2>Game Figures</h2>
+                <p>Available soon...</p>
+                <button class="details-button">View Details</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal for Item Details -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="image-gallery">
+                <span class="arrow left-arrow">&#10094;</span>
+                <img id="modal-image" src="" alt="Product Image" />
+                <span class="arrow right-arrow">&#10095;</span>
+            </div>
+            <div class="dot-container"></div>
+            <h2 id="modal-title">Item Name</h2>
+            <p id="modal-description">Item description goes here.</p>
+            <p id="modal-price">Price: €0.00</p>
+            <button class="buy-button" onclick="purchaseItem()">Buy Now</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <img src="picture.png" alt="HydroWave Logo" class="footer-logo">
+            <div class="footer-text">
+                <h2>Contacts</h2>
+                <h3>Email:</h3>
+                <p>Game questions: <a href="mailto:hydrowave.support@gmail.com">hydrowave.support@gmail.com</a></p>
+                <p>Project questions: <a href="mailto:hydrowave.projects@gmail.com">hydrowave.projects@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts-purchase.js"></script>
     <script>
-    function toggleMenu() {
-        const navList = document.querySelector('.nav-list');
-        navList.classList.toggle('active');
-    }
-</script>
+        // Function to toggle mobile menu
+        function toggleMenu() {
+            const navList = document.querySelector('.nav-list');
+            navList.classList.toggle('active');
+        }
 
-        </body>
-        </html>
-        
+        // Purchase alert function
+        function purchaseItem() {
+            alert("Thank you for your purchase! This item will be available soon.");
+        }
+    </script>
+</body>
+</html>
