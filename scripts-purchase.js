@@ -20,8 +20,10 @@ document.querySelectorAll('.details-button').forEach(button => {
         modalImage.src = images[currentImageIndex];
         modalTitle.textContent = product.getAttribute('data-name');
         modalDescription.textContent = product.getAttribute('data-description');
-        modalPrice.textContent = `Price: €${product.getAttribute('data-price')}`;
-
+        modalPrice.textContent = product.getAttribute('data-price') !== "Available soon..." 
+            ? `Price: €${product.getAttribute('data-price')}`
+            : "Price: Not available";
+        
         dotContainer.innerHTML = '';
         images.forEach((_, index) => {
             const dot = document.createElement('span');
@@ -74,6 +76,35 @@ function updateImage() {
     });
 }
 
+// PayPal transaction
 function purchaseItem() {
-    alert("Thank you for your purchase! This item will be available soon.");
+    const itemName = modalTitle.textContent;
+    const itemPrice = parseFloat(modalPrice.textContent.replace('Price: €', ''));
+
+    if (!isNaN(itemPrice)) {
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        description: itemName,
+                        amount: {
+                            value: itemPrice.toFixed(2),
+                            currency_code: "EUR"
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    modal.style.display = 'none';
+                });
+            },
+            onError: function(err) {
+                alert('An error occurred during the transaction');
+            }
+        }).render('.buy-button'); // Replace .buy-button with a div where you want the button to appear
+    } else {
+        alert("This item is currently not available for purchase.");
+    }
 }
