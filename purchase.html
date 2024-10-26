@@ -60,12 +60,12 @@
                 <span class="arrow left-arrow">&#10094;</span>
                 <img id="modal-image" src="" alt="Product Image" />
                 <span class="arrow right-arrow">&#10095;</span>
-            <span class="close-button" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="dot-container"></div>
             <h2 id="modal-title">Item Name</h2>
             <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
-            <button class="buy-button" onclick="loadPayPalButton()">Buy Now</button>
-            <div id="paypal-button-container"></div>
+            <div id="paypal-button-container"></div> <!-- PayPal button placeholder -->
         </div>
     </div>
     
@@ -80,39 +80,35 @@
             navList.classList.toggle('active');
         }
 
-        let selectedItem = null;
-
         function openModal(button) {
             const product = button.closest('.product');
-            selectedItem = {
-                name: product.getAttribute('data-name'),
-                price: product.getAttribute('data-price')
-            };
+            const itemName = product.getAttribute('data-name');
+            const itemPrice = product.querySelector('p').textContent.replace('€', '');
 
-            document.getElementById('modal-title').textContent = selectedItem.name;
-            document.getElementById('modal-price').textContent = `Price: €${selectedItem.price}`;
+            document.getElementById('modal-title').textContent = itemName;
+            document.getElementById('modal-price').textContent = `Price: €${itemPrice}`;
             document.getElementById('modal').style.display = 'block';
 
             // Load the PayPal button
-            loadPayPalButton();
+            loadPayPalButton(itemPrice);
         }
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing PayPal buttons
         }
 
-        function loadPayPalButton() {
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear existing buttons
+        function loadPayPalButton(price) {
+            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
+            if (!price || price === "Available soon...") {
+                alert("This item is currently not available for purchase.");
+                return;
+            }
 
             paypal.Buttons({
                 createOrder: (data, actions) => {
                     return actions.order.create({
                         purchase_units: [{
-                            description: selectedItem.name,
-                            amount: {
-                                value: selectedItem.price
-                            }
+                            amount: { value: price }
                         }]
                     });
                 },
@@ -123,11 +119,24 @@
                     });
                 },
                 onError: (err) => {
-                    console.error('Error during transaction:', err);
+                    console.error(err);
                     alert('An error occurred during the transaction');
                 }
             }).render('#paypal-button-container');
         }
+
+        document.querySelectorAll('.details-button').forEach(button => {
+            button.addEventListener('click', function() {
+                openModal(this);
+            });
+        });
+
+        document.querySelector('.close-button').addEventListener('click', closeModal);
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('modal')) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
