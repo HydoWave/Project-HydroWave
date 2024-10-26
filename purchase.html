@@ -56,17 +56,20 @@
     <!-- Modal for Item Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal()">&times;</span>
+            <span class="close-button">&times;</span>
             <div class="image-gallery">
+                <!-- Left Arrow -->
                 <span class="arrow left-arrow">&#10094;</span>
+                <!-- Image Display -->
                 <img id="modal-image" src="" alt="Product Image" />
+                <!-- Right Arrow -->
                 <span class="arrow right-arrow">&#10095;</span>
             </div>
-            <div class="dot-container"></div>
+            <div class="dot-container"></div> <!-- Dots will be dynamically added here -->
             <h2 id="modal-title">Item Name</h2>
             <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
-            <!-- PayPal Button container -->
+            <button class="buy-button">Buy Now</button>
             <div id="paypal-button-container"></div>
         </div>
     </div>
