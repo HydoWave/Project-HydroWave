@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Items</title>
     <link rel="stylesheet" href="styles purchase.css">
-
-    <!-- PayPal SDK with Client ID -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=EUR"></script>
-
-    <!-- Stripe SDK -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AYEpJCJ2PgvY5JnEfCLK2KIL6YxRosBJaQfwn3gjYSVCcKzXBUfm2hWPVFjwl_mmniEF0W6L0JKLc9wD&currency=EUR"></script>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <img src="picture.png" alt="HydroWave Logo" class="image">
@@ -28,30 +22,28 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="content">
+     <div class="content">
         <h1 class="centered-text">Purchase Items</h1>
         <section class="product-list">
-            <!-- Product Items -->
-            <div class="product" data-name="Full Game" data-price="23.00" data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg,item1-3.jpg,item1-4.jpg,item1-5.jpg,item1-6.jpg">
+            <div class="product" data-name="Full Game" data-price="€23.00" data-description="Get the complete game experience with all features included." data-images="item1-1.jpg,item1-2.jpg,item1-3.jpg,item1-4.jpg,item1-5.jpg,item1-6.jpg">
                 <img src="item1.jpg" alt="Full Game" class="product-image">
                 <h2>Full Game</h2>
                 <p>€23.00</p>
                 <button class="details-button">View Details</button>
             </div>
-            <div class="product" data-name="Cards" data-price="8.00" data-description="Have your cards been damaged or lost? Don't worry, you can just order a new card pack." data-images="item2-1.jpg,item2-2.jpg,item2-3.jpg,item2-4.jpg,item2-5.jpg,item2-6.jpg">
+            <div class="product" data-name="Cards" data-price="€8.00" data-description="Have your cards been damaged or lost? Don't worry, you can just order a new card pack." data-images="item2-1.jpg,item2-2.jpg,item2-3.jpg,item2-4.jpg,item2-5.jpg,item2-6.jpg">
                 <img src="item2.jpg" alt="Cards" class="product-image">
                 <h2>Cards</h2>
                 <p>€8.00</p>
                 <button class="details-button">View Details</button>
             </div>
-            <div class="product" data-name="Gameboard" data-price="8.00" data-description="Has your gameboard been damaged? Don't worry, you can just order a new gameboard." data-images="item3-1.jpg,item3-2.jpg,item3-3.jpg,item3-4.jpg,item3-5.jpg,item3-6.jpg">
+            <div class="product" data-name="Gameboard" data-price="€8.00" data-description="Has your gameboard been damaged? Don't worry, you can just order a new gameboard." data-images="item3-1.jpg,item3-2.jpg,item3-3.jpg,item3-4.jpg,item3-5.jpg,item3-6.jpg">
                 <img src="item3.jpg" alt="Gameboard" class="product-image">
                 <h2>Gameboard</h2>
                 <p>€8.00</p>
                 <button class="details-button">View Details</button>
             </div>
-            <div class="product" data-name="Game Figures" data-price="0.01" data-description="Have your game figures been lost? Don't worry, you can just order a new figure pack." data-images="item4-1.jpg,item4-2.jpg,item4-3.jpg,item4-4.jpg,item4-5.jpg,item4-6.jpg">
+            <div class="product" data-name="Game Figures" data-price="€0.01" data-description="Have your game figures been lost? Don't worry, you can just order a new figure pack." data-images="item4-1.jpg,item4-2.jpg,item4-3.jpg,item4-4.jpg,item4-5.jpg,item4-6.jpg">
                 <img src="item4.jpg" alt="Game Figures" class="product-image">
                 <h2>Game Figures</h2>
                 <p>€0.01</p>
@@ -60,7 +52,7 @@
         </section>
     </div>
 
-    <!-- Modal for Item Details -->
+  <!-- Modal for Item Details -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -73,32 +65,21 @@
             <h2 id="modal-title">Item Name</h2>
             <p id="modal-description">Item description goes here.</p>
             <p id="modal-price">Price: €0.00</p>
-            
-            <!-- PayPal button placeholder -->
-            <div id="paypal-button-container"></div>
-            
-            <!-- Stripe button placeholder -->
-            <div id="stripe-button-container">
-                <button id="card-button">Pay with Card</button>
-            </div>
+            <div id="paypal-button-container"></div> <!-- PayPal button placeholder -->
         </div>
     </div>
-
-    <!-- Footer -->
+    
     <footer>
         <!-- Footer content here -->
     </footer>
 
-    <!-- JavaScript for functionality -->
     <script src="scripts-purchase.js"></script>
     <script>
-        // Toggle navigation menu for mobile
         function toggleMenu() {
             const navList = document.querySelector('.nav-list');
             navList.classList.toggle('active');
         }
 
-        // Modal functionality to open and show product details
         function openModal(button) {
             const product = button.closest('.product');
             const itemName = product.getAttribute('data-name');
