@@ -1,6 +1,3 @@
-// Initialize Stripe with your publishable key
-const stripe = Stripe('pk_live_51QEXDhHmpdjn9n3JD2ZSuIbEdHCE8RPOARhozx60L0kiSvo5bwSGqHIZUtSl3xsIKptY8oZX1NEYb0GahWzOHoIj00AE7vCYEA');
-
 // Modal functionality
 const modal = document.getElementById('modal');
 const modalImage = document.getElementById('modal-image');
@@ -8,26 +5,39 @@ const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 const modalPrice = document.getElementById('modal-price');
 const paypalButtonContainer = document.getElementById('paypal-button-container');
-const stripeButtonContainer = document.getElementById('stripe-button-container');
 const closeButton = document.querySelector('.close-button');
+const dotContainer = document.querySelector('.dot-container');
+let currentImageIndex = 0;
+let images = [];
 
+// Open Modal and load product details
 function openModal(button) {
     const product = button.closest('.product');
-    const price = product.getAttribute('data-price');
-    const name = product.getAttribute('data-name');
-    const description = product.getAttribute('data-description');
+    images = product.getAttribute('data-images').split(',');
 
-    modalTitle.textContent = name;
-    modalDescription.textContent = description;
-    modalPrice.textContent = `Price: €${price}`;
+    currentImageIndex = 0;
+    modalImage.src = images[currentImageIndex];
+    modalTitle.textContent = product.getAttribute('data-name');
+    modalDescription.textContent = product.getAttribute('data-description');
+    modalPrice.textContent = `Price: €${product.getAttribute('data-price')}`;
 
-    // Load PayPal and Stripe buttons
-    loadPayPalButton(price);
-    loadStripeButton(price);
+    // Load PayPal Button with the product price
+    loadPayPalButton(product.getAttribute('data-price'));
+
+    // Initialize image gallery dots
+    dotContainer.innerHTML = '';
+    images.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dotContainer.appendChild(dot);
+        dot.addEventListener('click', () => showImage(index));
+    });
 
     modal.style.display = 'block';
 }
 
+// Close Modal
 function closeModal() {
     modal.style.display = 'none';
 }
@@ -57,24 +67,17 @@ function loadPayPalButton(price) {
     }).render('#paypal-button-container');
 }
 
-// Load Stripe Button with dynamic price
-function loadStripeButton(price) {
-    document.getElementById('card-button').onclick = async () => {
-        try {
-            const response = await fetch('/create-checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ price: price })
-            });
-            const session = await response.json();
-            await stripe.redirectToCheckout({ sessionId: session.id });
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to initiate card payment');
-        }
-    };
+// Image navigation functions
+function showImage(index) {
+    currentImageIndex = index;
+    updateImage();
+}
+
+function updateImage() {
+    modalImage.src = images[currentImageIndex];
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentImageIndex);
+    });
 }
 
 // Event Listeners
@@ -85,8 +88,19 @@ document.querySelectorAll('.details-button').forEach(button => {
 });
 
 closeButton.addEventListener('click', closeModal);
+
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
         closeModal();
     }
+});
+
+document.querySelector('.left-arrow').addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    updateImage();
+});
+
+document.querySelector('.right-arrow').addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    updateImage();
 });
