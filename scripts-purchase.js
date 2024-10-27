@@ -1,5 +1,5 @@
 // Initialize Stripe with your publishable key
-const stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');
+const stripe = Stripe('pk_live_51QEXDhHmpdjn9n3JD2ZSuIbEdHCE8RPOARhozx60L0kiSvo5bwSGqHIZUtSl3xsIKptY8oZX1NEYb0GahWzOHoIj00AE7vCYEA');
 
 // Modal functionality
 const modal = document.getElementById('modal');
