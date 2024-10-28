@@ -88,65 +88,6 @@
             navList.classList.toggle('active');
         }
 
-        function openModal(button) {
-            const product = button.closest('.product');
-            const itemName = product.getAttribute('data-name');
-            const itemPrice = product.querySelector('p').textContent.replace('€', '');
-
-            document.getElementById('modal-title').textContent = itemName;
-            document.getElementById('modal-price').textContent = `Price: €${itemPrice}`;
-            document.getElementById('modal').style.display = 'block';
-
-            // Load the PayPal button
-            loadPayPalButton(itemPrice);
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        function loadPayPalButton(price) {
-            document.getElementById('paypal-button-container').innerHTML = ''; // Clear any existing button
-            if (!price || price === "Available soon...") {
-                alert("This item is currently not available for purchase.");
-                return;
-            }
-
-            paypal.Buttons({
-                createOrder: (data, actions) => {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: { value: price }
-                        }]
-                    });
-                },
-                onApprove: (data, actions) => {
-                    return actions.order.capture().then((details) => {
-                        alert(`Transaction completed by ${details.payer.name.given_name}!`);
-                        closeModal();
-                    });
-                },
-                onError: (err) => {
-                    console.error(err);
-                    alert('An error occurred during the transaction');
-                }
-            }).render('#paypal-button-container');
-        }
-
-        document.querySelectorAll('.details-button').forEach(button => {
-            button.addEventListener('click', function() {
-                openModal(this);
-            });
-        });
-
-        document.querySelector('.close-button').addEventListener('click', closeModal);
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('modal')) {
-                closeModal();
-            }
-        });
-    </script>
-
     <!-- PayPal Logo -->
 <table border="0" cellpadding="10" cellspacing="0" align="center">
     <tr>au_html.txt
