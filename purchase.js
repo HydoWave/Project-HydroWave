@@ -5,7 +5,7 @@ dotenv.config();
 
 paypal.configure({
   mode: "sandbox",
-  client_id: process.env.CLIENT_ID,
+  client_id: process.env.Ab9AMqOedq-DCK9c1HuK4L3iF6vf9QUhI-xP76QPtEp-nRbZGi4lc8rK_Yt3K7ikblhagSXcZ1NVXQwN,
   client_secret: process.env.CLIENT_SECRET
 });
 
