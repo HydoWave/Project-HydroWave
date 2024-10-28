@@ -37,6 +37,21 @@ function openModal(button) {
     modal.style.display = 'block';
 }
 
+
+ function openModal(button) {
+            const product = button.closest('.product');
+            const itemName = product.getAttribute('data-name');
+            const itemPrice = product.querySelector('p').textContent.replace('€', '');
+
+            document.getElementById('modal-title').textContent = itemName;
+            document.getElementById('modal-price').textContent = `Price: €${itemPrice}`;
+            document.getElementById('modal').style.display = 'block';
+
+            // Load the PayPal button
+            loadPayPalButton(itemPrice);
+        }
+
+
 // Close Modal
 function closeModal() {
     modal.style.display = 'none';
@@ -66,6 +81,21 @@ function loadPayPalButton(price) {
         }
     }).render('#paypal-button-container');
 }
+
+
+ document.querySelectorAll('.details-button').forEach(button => {
+            button.addEventListener('click', function() {
+                openModal(this);
+            });
+        });
+
+        document.querySelector('.close-button').addEventListener('click', closeModal);
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('modal')) {
+                closeModal();
+            }
+        });
+
 
 // Image navigation functions
 function showImage(index) {
