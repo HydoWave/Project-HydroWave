@@ -367,6 +367,12 @@ footer {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.imageJA {
+    width: 142px;
+    height: 80px;
+    align-items: left;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .product {
