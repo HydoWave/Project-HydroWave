@@ -85,10 +85,10 @@
     <script src="scripts-purchase.js"></script>
     <script scr="purchase.js"></script>
     <script>
-        function toggleMenu() {
-            const navList = document.querySelector('.nav-list');
-            navList.classList.toggle('active');
-        }
+       function toggleMenu() {
+        const navList = document.querySelector('.nav-list');
+        navList.classList.toggle('active');
+       }
          function initPayPalButton(price, description) {
             paypal.Buttons({
                 createOrder: function(data, actions) {
