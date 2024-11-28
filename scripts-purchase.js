@@ -4,129 +4,54 @@ const modalImage = document.getElementById('modal-image');
 const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 const modalPrice = document.getElementById('modal-price');
-const paypalButtonContainer = document.getElementById('paypal-button-container');
 const closeButton = document.querySelector('.close-button');
 const dotContainer = document.querySelector('.dot-container');
+
 let currentImageIndex = 0;
 let images = [];
 
-// Open Modal and load product details
-function openModal(button) {
-    const product = button.closest('.product');
-    images = product.getAttribute('data-images').split(',');
-
-    currentImageIndex = 0;
-    modalImage.src = images[currentImageIndex];
-    modalTitle.textContent = product.getAttribute('data-name');
-    modalDescription.textContent = product.getAttribute('data-description');
-    modalPrice.textContent = `Price: €${product.getAttribute('data-price')}`;
-
-    // Load PayPal Button with the product price
-    loadPayPalButton(product.getAttribute('data-price'));
-
-    // Initialize image gallery dots
-    dotContainer.innerHTML = '';
-    images.forEach((_, index) => {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
-        dotContainer.appendChild(dot);
-        dot.addEventListener('click', () => showImage(index));
-    });
-
-    modal.style.display = 'block';
-}
-
-
- function openModal(button) {
-            const product = button.closest('.product');
-            const itemName = product.getAttribute('data-name');
-            const itemPrice = product.querySelector('p').textContent.replace('€', '');
-
-            document.getElementById('modal-title').textContent = itemName;
-            document.getElementById('modal-price').textContent = `Price: €${itemPrice}`;
-            document.getElementById('modal').style.display = 'block';
-
-            // Load the PayPal button
-            loadPayPalButton(itemPrice);
-        }
-
-
-// Close Modal
-function closeModal() {
-    modal.style.display = 'none';
-}
-
-// Load PayPal Button with dynamic price
-function loadPayPalButton(price) {
-    paypalButtonContainer.innerHTML = ''; // Clear any existing button
-
-    paypal.Buttons({
-        createOrder: (data, actions) => {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: { value: price }
-                }]
-            });
-        },
-        onApprove: (data, actions) => {
-            return actions.order.capture().then(details => {
-                alert(`Transaction completed by ${details.payer.name.given_name}!`);
-                closeModal();
-            });
-        },
-        onError: (err) => {
-            console.error(err);
-            alert('An error occurred during the transaction');
-        }
-    }).render('#paypal-button-container');
-}
-
-
- document.querySelectorAll('.details-button').forEach(button => {
-            button.addEventListener('click', function() {
-                openModal(this);
-            });
-        });
-
-        document.querySelector('.close-button').addEventListener('click', closeModal);
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('modal')) {
-                closeModal();
-            }
-        });
-
-
-// Image navigation functions
-function showImage(index) {
-    currentImageIndex = index;
-    updateImage();
-}
-
-function updateImage() {
-    modalImage.src = images[currentImageIndex];
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentImageIndex);
-    });
-}
-
-// Event Listeners
+// Event listeners for modal open
 document.querySelectorAll('.details-button').forEach(button => {
     button.addEventListener('click', function() {
-        openModal(this);
+        const product = this.parentElement;
+        images = product.getAttribute('data-images').split(',');
+
+        // Set initial modal content
+        currentImageIndex = 0;
+        modalImage.src = images[currentImageIndex];
+        modalTitle.textContent = product.getAttribute('data-name');
+        modalDescription.textContent = product.getAttribute('data-description');
+        modalPrice.textContent = `Price: €${product.getAttribute('data-price')}`;
+
+        // Create dots for image gallery
+        dotContainer.innerHTML = ''; // Clear existing dots
+        images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dotContainer.appendChild(dot);
+            dot.addEventListener('click', () => showImage(index));
+        });
+
+        modal.style.display = 'block';
     });
 });
 
-closeButton.addEventListener('click', closeModal);
+// Close modal
+closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
 
-window.addEventListener('click', (event) => {
+// Close modal when clicking outside of content
+window.addEventListener('click', event => {
     if (event.target === modal) {
-        closeModal();
+        modal.style.display = 'none';
     }
 });
 
+// Navigate through images
 document.querySelector('.left-arrow').addEventListener('click', () => {
-    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    currentImageIndex = (currentImageIndex - 1 + images.length) <= 0 ? 0 : (currentImageIndex - 1 + images.length) % images.length;
     updateImage();
 });
 
@@ -134,3 +59,21 @@ document.querySelector('.right-arrow').addEventListener('click', () => {
     currentImageIndex = (currentImageIndex + 1) % images.length;
     updateImage();
 });
+
+// Show image by index
+function showImage(index) {
+    currentImageIndex = index;
+    updateImage();
+}
+
+// Update image and active dot
+function updateImage() {
+    modalImage.src = images[currentImageIndex];
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        if (index === currentImageIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
