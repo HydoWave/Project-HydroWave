@@ -92,5 +92,28 @@
         navList.classList.toggle('active');
        }
      </script>
+    <script>
+    function sendEmail() {
+        // Get modal data
+        const title = document.getElementById('modal-title').textContent;
+        const description = document.getElementById('modal-description').textContent;
+        const price = document.getElementById('modal-price').textContent;
+
+        // Prepare email subject and body
+        const subject = `Purchase Request for ${title}`;
+        const body = `Hello,\n\nI would like to purchase the following item:\n\n` +
+                     `Item: ${title}\n` +
+                     `Description: ${description}\n` +
+                     `Price: ${price}\n\n` +
+                     `Thank you.`;
+
+        // Create mailto link
+        const mailtoLink = `mailto:hydrowave.projects@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Open email client
+        window.location.href = mailtoLink;
+    }
+</script>
+
 </body>
 </html>
