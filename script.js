@@ -7,3 +7,4 @@ window.addEventListener("scroll", () => {
     } else {
         body.classList.remove("scrolled");
     }
+});
