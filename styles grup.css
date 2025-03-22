@@ -122,6 +122,24 @@ footer {
     height: 80px;
 }
 
+.instagram-button {
+        border: none;
+        background: none;
+        padding: 0;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+    }
+
+    .instagram-button img {
+        width: 50px; /* Adjust based on your image size */
+        height: 50px; /* Adjust based on your image size */
+        display: block;
+    }
+
+    .instagram-button:hover {
+        opacity: 0.8;
+    }
+
 .footer-text {
     max-width: 800px;
     text-align: left;
