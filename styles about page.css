@@ -122,6 +122,11 @@ footer {
     height: 80px;
 }
 
+.footer-img {
+    width: 60px;
+    height: 60px;
+}
+
 .footer-text {
     max-width: 800px;
     text-align: left;
